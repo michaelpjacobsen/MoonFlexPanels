@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Moon Phases Flex Panels</title>
+  <link href='https://fonts.googleapis.com/css?family=Amatic+SC' rel='stylesheet' type='text/css'>
+</head>
+<body>
+  <style>
+    html {
+      box-sizing: border-box;
+      background: #ffc600;
+      font-family: 'helvetica neue';
+      font-size: 10px;
+      font-weight: 100;
+    }
+    
+    body {
+      margin: 0;
+    }
+    
+    *, *:before, *:after {
+      box-sizing: inherit;
+    }
+
+    .panels {
+      min-height: 100vh;
+      overflow: hidden;
+      display: flex;
+    }
+
+    .panel {
+      background: #6B0F9C;
+      box-shadow: inset 0 0 0 5px rgba(255,255,255,0.1);
+      color: white;
+      text-align: center;
+      align-items: center;
+      /* Safari transitionend event.propertyName === flex */
+      /* Chrome + FF transitionend event.propertyName === flex-grow */
+      transition:
+        font-size 0.7s cubic-bezier(0.61,-0.19, 0.7,-0.11),
+        flex 0.7s cubic-bezier(0.61,-0.19, 0.7,-0.11),
+        background 0.2s;
+      font-size: 8px;
+      background-size: cover;
+      background-position: center;
+      flex: 1;
+      justify-content: center;
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .panel1 { background: #000000; }
+    .panel2 { background: #222222; }
+    .panel3 { background: #444444; }
+    .panel4 { background: #666666; }
+    .panel5 { background: #888888; }
+    .panel6 { background: #666666; }
+    .panel7 { background: #444444; }
+    .panel8 { background: #222222; }
+
+    /* Flex Items */
+    .panel > * {
+      margin: 0;
+      width: 100%;
+      transition: transform 0.5s;
+      flex: 1 0 auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .panel > *:first-child {transform: translateY(-100%);}
+    .panel.open-active > *:first-child {transform: translateY(0);}
+    .panel > *:last-child {transform: translateY(100%);}
+    .panel.open-active > *:last-child {transform: translateY(0);}
+
+    .panel p {
+      text-transform: uppercase;
+      font-family: 'Amatic SC', cursive;
+      text-shadow: 0 0 4px rgba(0, 0, 0, 0.72), 0 0 14px rgba(0, 0, 0, 0.45);
+      font-size: 2em;
+    }
+    
+    .panel p:nth-child(2) {
+      font-size: 4em;
+    }
+
+    .panel.open {
+      flex: 5;
+      font-size: 40px;
+    }
+
+    .cta {
+      color: white;
+      text-decoration: none;
+    }
+
+  </style>
+
+
+  <div class="panels">
+    <div class="panel panel1">
+      <p>New</p>
+      <p>🌑</p>
+      <p>Moon</p>
+    </div>
+    <div class="panel panel2">
+      <p>Waxing</p>
+      <p>🌒</p>
+      <p>Cresent</p>
+    </div>
+    <div class="panel panel3">
+      <p>First</p>
+      <p>🌓</p>
+      <p>Quarter</p>
+    </div>
+    <div class="panel panel4">
+      <p>Waxing</p>
+      <p>🌔</p>
+      <p>Gibbous</p>
+    </div>
+    <div class="panel panel5">
+      <p>Full</p>
+      <p>🌕</p>
+      <p>Moon</p>
+    </div>
+    <div class="panel panel6">
+      <p>Waning</p>
+      <p>🌖</p>
+      <p>Gibbous</p>
+    </div>
+    <div class="panel panel7">
+      <p>Last</p>
+      <p>🌗</p>
+      <p>Quarter</p>
+    </div>
+    <div class="panel panel8">
+      <p>Waning</p>
+      <p>🌘</p>
+      <p>Cresent</p>
+    </div>
+  </div>
+
+  <script>
+const panels = document.querySelectorAll('.panel');
+
+function toggleOpen() {
+  this.classList.toggle('open');
+}
+
+function toggleActive(e) {
+  console.log(e.propertyName);
+  if(e.propertyName.includes('flex')) {
+    this.classList.toggle('open-active');
+
+  }
+
+}
+
+panels.forEach(panel => panel.addEventListener('click', toggleOpen));
+panels.forEach(panel => panel.addEventListener('transitionend', toggleActive));
+
+  </script>
+
+
+
+</body>
+</html>
